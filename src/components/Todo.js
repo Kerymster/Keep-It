@@ -22,6 +22,7 @@ const Todo = () => {
   };
 
   const addTodo = (e) => {
+    console.log("hello test git");
     e.preventDefault();
     todoItem &&
       todoItem !== "" &&
