@@ -23,6 +23,7 @@ const TodoItem = (props) => {
     console.log(user);
     dispatch(toggleTodo(e.target.value));
     console.log("test");
+    console.log("test-2");
   };
 
   // useEffect(() => {
