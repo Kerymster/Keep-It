@@ -22,14 +22,19 @@ const TodoItem = (props) => {
     console.log(!checked);
     console.log(user);
     dispatch(toggleTodo(e.target.value));
-    console.log("test");
-    console.log("test-2");
-    console.log("test-3");
   };
 
-  // useEffect(() => {
-  //   localStorage.getItem("todos");
-  // }, []);
+  const eachUserTodos = () => {
+    let todos = JSON.parse(localStorage.getItem("todos" ? "todos" : []));
+    todos.forEach((todo) => {
+      return todo.userId === user;
+    });
+  };
+  eachUserTodos();
+
+  useEffect(() => {
+    localStorage.getItem("todos");
+  }, []);
 
   return (
     todos !== "" &&
