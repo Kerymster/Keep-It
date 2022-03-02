@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addUser } from "../Redux/actions/usersActions";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -21,7 +21,8 @@ const getLocalData = () => {
 };
 
 const SignUp = () => {
-  const users = useSelector((state) => state.usersReducer.users);
+  // const users = useSelector((state) => state.usersReducer.users);
+  const users = getLocalData();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 

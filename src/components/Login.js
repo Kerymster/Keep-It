@@ -30,7 +30,8 @@ const Login = () => {
   const localData = getLocalData();
 
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.usersReducer.users);
+  // const users = useSelector((state) => state.usersReducer.users);
+  const users = JSON.parse(localStorage.getItem("users"));
 
   useEffect(() => {
     setLsToken();

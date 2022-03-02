@@ -24,18 +24,6 @@ const TodoItem = (props) => {
     dispatch(toggleTodo(e.target.value));
   };
 
-  const eachUserTodos = () => {
-    let todos = JSON.parse(localStorage.getItem("todos" ? "todos" : []));
-    todos.forEach((todo) => {
-      return todo.userId === user;
-    });
-  };
-  eachUserTodos();
-
-  useEffect(() => {
-    localStorage.getItem("todos");
-  }, []);
-
   return (
     todos !== "" &&
     todos.map(

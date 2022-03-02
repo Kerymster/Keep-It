@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { todoActions } from "../Redux/actions/todoActions";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -9,12 +9,33 @@ import TodoItem from "./TodoItem";
 import Auth from "./Auth";
 import { v4 as uuidv4 } from "uuid";
 
+const getLocalData = () => {
+  const localTodoData = localStorage.getItem("todos");
+
+  if (localTodoData) {
+    return JSON.parse(localTodoData);
+  } else {
+    return [];
+  }
+};
+
 const Todo = () => {
   const [todoItem, setTodoItem] = useState("");
   const userId = Auth();
-
   const dispatch = useDispatch();
-  const todos = useSelector((state) => state.todoReducers.todos);
+  const localData = getLocalData();
+
+  // ---------- Local Storage ----------
+
+  useEffect(() => {
+    setLocalStorageTodos();
+  }, []);
+
+  const setLocalStorageTodos = () => {
+    localStorage.setItem("todos", localData ? JSON.stringify(localData) : []);
+  };
+
+  //---------------- Handlers---------------
 
   const setTodo = (e) => {
     let item = e.target.value.trim();
@@ -26,20 +47,11 @@ const Todo = () => {
     todoItem &&
       todoItem !== "" &&
       dispatch(todoActions({ todo: todoItem, id: uuidv4(), userId: userId }));
-
+    // setlocal
+    localData.push({ todo: todoItem, id: uuidv4(), userId: userId });
+    localStorage.setItem("todos", JSON.stringify(localData));
     setTodoItem("");
   };
-
-  let todosLs = JSON.stringify(todos);
-  localStorage.setItem("todos", todosLs);
-  //authAndTodoList=()
-
-  useEffect(() => {
-    const userTodos = JSON.parse(localStorage.getItem("todos" ? "todos" : []));
-    console.log(userTodos);
-    //reduxtan aldığın token ile local storagetakini karşılaştıracagız. online olan ile tutyorsa user idsi alacağız
-    //local storagetaki todoları user id ye göre filtreleyip current liste set edeceğiz
-  }, []);
 
   return (
     <div>
