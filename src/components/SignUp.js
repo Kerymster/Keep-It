@@ -38,14 +38,10 @@ const SignUp = () => {
   // ---------- Local Storage ----------
 
   useEffect(() => {
-    setLocalStorageUsers();
-  }, []);
+    localStorage.setItem("users", localData ? JSON.stringify(localData) : []);
+  }, [localData]);
 
   //---------------Events---------
-
-  const setLocalStorageUsers = () => {
-    localStorage.setItem("users", localData ? JSON.stringify(localData) : []);
-  };
 
   const handleSignUp = (e) => {
     values.userId = uuidv4();
