@@ -21,7 +21,6 @@ const getLocalData = () => {
 };
 
 const SignUp = () => {
-  // const users = useSelector((state) => state.usersReducer.users);
   const users = getLocalData();
   const navigate = useNavigate();
   const dispatch = useDispatch();
