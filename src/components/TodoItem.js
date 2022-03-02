@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { removeTodo, toggleTodo } from "../Redux/actions/todoActions";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -11,8 +11,12 @@ import { useState } from "react";
 const TodoItem = (props) => {
   const dispatch = useDispatch();
   const user = props.userId;
-  const todos = useSelector((state) => state.todoReducers.todos);
+  // const todos = useSelector((state) => state.todoReducers.todos);
+  const todos = JSON.parse(localStorage.getItem("todos"));
   const [checked, setChecked] = useState(false);
+
+  //----------Handlers------------
+
   const handleDelete = (e) => {
     dispatch(removeTodo(e.target.name));
     let newTodos = todos.filter((item) => item.id !== e.target.name);
