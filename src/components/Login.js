@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setToken } from "../Redux/actions/authenticationActions";
 import { useNavigate } from "react-router-dom";
 import "../styles/App.css";
@@ -9,16 +9,6 @@ import Form from "react-bootstrap/Form";
 import validationLogin from "./validationLogin";
 import { v4 as uuidv4 } from "uuid";
 
-const getLocalData = () => {
-  let user = localStorage.getItem("onlineUser");
-
-  if (user) {
-    return JSON.parse(localStorage.getItem("onlineUser"));
-  } else {
-    return {};
-  }
-};
-
 const Login = () => {
   const navigate = useNavigate();
   const [values, setValues] = useState({
@@ -27,8 +17,6 @@ const Login = () => {
     token: "",
   });
   const [errors, setErrors] = useState({});
-  const localData = getLocalData();
-
   const dispatch = useDispatch();
   const users = JSON.parse(localStorage.getItem("users"));
 

@@ -28,12 +28,8 @@ const Todo = () => {
   // ---------- Local Storage ----------
 
   useEffect(() => {
-    setLocalStorageTodos();
-  }, []);
-
-  const setLocalStorageTodos = () => {
     localStorage.setItem("todos", localData ? JSON.stringify(localData) : []);
-  };
+  }, [localData]);
 
   //---------------- Handlers---------------
 
