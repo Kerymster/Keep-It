@@ -6,27 +6,36 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
 import ListGroup from "react-bootstrap/ListGroup";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const TodoItem = (props) => {
   const dispatch = useDispatch();
   const user = props.userId;
-  const todos = useSelector((state) => state.todoReducers.todos);
+  // const todos = useSelector((state) => state.todoReducers.todos);
+  const todos = JSON.parse(localStorage.getItem("todos" ? "todos" : []));
   const [checked, setChecked] = useState(false);
+  const [todoList, setTodoList] = useState(todos);
   const handleDelete = (e) => {
     dispatch(removeTodo(e.target.name));
+    let newTodos = todos.filter((item) => item.id !== e.target.name);
+    setTodoList(newTodos);
+    localStorage.setItem("todos", JSON.stringify(newTodos));
   };
 
   const handleCheck = (e) => {
     setChecked(e.target.checked);
-    console.log(!checked);
-    console.log(user);
     dispatch(toggleTodo(e.target.value));
   };
 
+  // useEffect(() => {
+  //   let;
+  // }, []);
+
+  //-------------JSX----------------
+
   return (
-    todos !== "" &&
-    todos.map(
+    todoList !== "" &&
+    todoList.map(
       (item) =>
         item.userId === user &&
         item !== "" && (
